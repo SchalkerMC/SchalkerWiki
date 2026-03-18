@@ -1,0 +1,1559 @@
+﻿# !!! IMPORTANT: BreweryX configuration files do NOT support external comments! If you add any comments, they will be overwritten !!!
+# -- Рецепты напитков--
+
+# Удобный и локализованный гайд на этот раздел можно найти по ссылке - https://brewery.lumamc.net/ru/guide/recipies/
+
+# enabled: true/false - позволяет выключить напиток, не удаляя его из файла
+
+# name: Имя, ИЛИ три различных имени для плохого/среднего/хорошего качества напитка (Поддерживает цвет: &6 или hex - &#123123)
+#   пример: name: 'Плохое пиво/Среднее пиво/&6&lПИЗДАТОЕ ПИВО'
+
+# ingredients: 'ID/Количество'
+#   https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+#   Вещи из других плагинов вписывать с префиксом: 'plugin:id/кол-во' (Сейчас поддерживаются Brewery, Garden (BreweryX Garden Addon), Oraxen, ItemsAdder, Nexo, Slimefun).
+#   Например: '- itemsadder:grape/5'
+#   Кастом итемы (из custom-items.yml) вписываются просто по их ID, без префикса (Например, '- vinograd/10')
+#   Также можно использовать одни напитки в качестве ингредиентов для других. Формат выглядит вот так: 'brewery:ID/число'
+#   Например: '- brewery:wheatbeer/1'
+
+# cookingtime: Время, в минутах, которое ингредиенты должны вариться в котле.
+
+# distillruns: Сколько кругов дистилляции на зельеварке напиток должен пройти.
+
+# distilltime: Сколько секунд занимает один круг дистилляции (Время по умолчанию - 40 сек. Дефолтное время для ванильных зелий - 20 сек)
+
+# wood: Из какого дерева должна быть бочка:
+#   0=Любое 1=Береза 2=Дуб 3=Тропическое 4=Ель
+#   5=Акация 6=Темный дуб 7=Багровое 8=Искаженное 9=Мангровое
+#   10=Вишневое 11=Бамбуковое 12=Резная Медь 13=Бледный Дуб
+#     Вместо номера можно также указывать название или ID.
+#     Возможные варианты:
+#     wood: 13
+#     wood: pale_oak
+#     wood: pale oak
+#   Если включено настаивание в ванильных майнкрафтовских бочках, то они считаются за дубовые.
+
+# age: Сколько "лет" напиток должен настояться в бочке.
+
+# color: Цвет готового зелья
+#   Возможные цвета: DARK_RED, RED, BRIGHT_RED, ORANGE, YELLOW, PINK, PURPLE, BLUE, CYAN, WATER, TEAL, OLIVE, GREEN, LIME, BLACK, GREY, BRIGHT_GREY, WHITE
+#   Или RGB-цвета (color: 99FF33)
+
+# difficulty: Сложность напитка. Чем выше - тем более точно нужно будет следовать рецепту, чтобы напиток получился 5-звездным
+
+# alcohol: Количество опьянения, которое добавляется при употреблении (до 100, поддерживаются отрицательные значения)
+
+# lore: Описание готового напитка (Поддерживает цвет: &6, или &#AABBCC)
+#   при помощи плюсов можно указать разное описание для разных кровней качества: + bad, ++ normal, +++ good.
+#   - +++ Крутейшее пойло.
+#   - ++ Ну такое...
+#   - + Эх щас бы сливок на соски себе намазать...
+
+# servercommands: Команды, выполняемые СЕРВЕРОМ при употреблении (Плейсхолдеры: %player_name%  %quality%)
+#   Как и описания, поддерживает различные уровни качества: + bad, ++ normal, +++ good.
+#   - +++ op %player_name%
+#   - ++ money give %player_name% 10
+#   - + essentials:heal %player_name%
+#  Команды могут быть отложены, если добавить "/ <число>s" в конце:
+#   - op Jsinco / 3s
+#  Вместо s (секунды) можно использовать m или h (минуты или часы)
+
+# playercommands: Команды, выполняемые ОТ ЛИЦА ИГРОКА при употреблении (Плейсхолдеры: %player_name%  %quality%)
+#   Как и описания, поддерживает различные уровни качества: + bad, ++ normal, +++ good.
+#   - +++ spawn
+#   - ++ home
+#   - + suicide
+#  Команды могут быть отложены, если добавить "/ <число>s" в конце:
+#   - op Jsinco / 3s
+#  Вместо s (секунды) можно использовать m или h (минуты или часы)
+
+# drinkmessage: Сообщение в чате, которое показывается игроку при употреблении.
+
+# drinktitle: Сообщение на экране, которое показывается при употреблении
+
+# glint: true/false - должен ли готовый напиток сиять как зачарованный предмет
+
+# customModelData: номер Custom Model Data.
+#   Можно указать один, а можно сразу для всех уровней качества:
+#   customModelData: 1
+#   customModelData: 1/2/3
+
+# effects: ID/уровень/длительность. Эффект, который накладывается при выпивании.
+#   Айдишники эффектов: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/potion/PotionEffectType.html
+#   ВАЖНО!!! Если ваша версия ниже 1.20.5, то некоторые эффекты у вас будут иметь другие ID, а не те, что по ссылке выше. Таков костыль баккита, существовавший до 1.20.5:
+#   Мгновенный урон - HARM, лечение - HEAL, тошнота - CONFUSION, медлительность - SLOW, прыгучесть - JUMP, спешка - FAST_DIGGING, сила - INCREASE_DAMAGE.
+#   Уровень и длительность эффекта поддерживают разброс в зависимости от качества приготовления при помощи "-",
+#   например: 'SPEED/1-2/30-40' = Скорость I на 30 сек. при худшем качестве и Скорость II на 40 сек. при лучшем качестве.
+#   Разброс может быть и в обратную сторону: 'POISON/3-1/20-5' = меньшее отравление при повышении качества.
+#   Максимальная длительность - 1638 секунд. Мгновенным эффектам, по типу Лечения, необязательно указывать длительность.
+recipes:
+  meth:
+    name: Мет
+    ingredients:
+      - gunpowder/3
+      - iron_nugget/4
+      - sugar/3
+    cookingtime: 5
+    distillruns: 3
+    color: dedede
+    difficulty: 4
+    lore:
+      - +++ &eСомнительный порошок в бутыльке.
+    effects:
+      - SPEED/1/30-120
+      - HEALTH_BOOST/1/30
+      - BLINDNESS/3/5
+  blue_meth:
+    name: Синий мет
+    ingredients:
+      - amethyst_shard/2
+      - gunpowder/2
+      - iron_nugget/6
+      - sugar/4
+    cookingtime: 5
+    distillruns: 3
+    color: 8fe9f7
+    difficulty: 5
+    lore:
+      - +++ &bСиний порошок в бутыльке. Совсем другой уровень.
+    effects:
+      - SPEED/1/50-160
+      - HEALTH_BOOST/1/50
+      - LEVITATION/1/10
+      - NAUSEA/1/3
+  bad_meth:
+    name: Дурной мет
+    ingredients:
+      - gunpowder/6
+      - iron_nugget/4
+      - sugar/2
+    cookingtime: 7
+    distillruns: 3
+    color: cfcaab
+    difficulty: 5
+    lore:
+      - +++ &4Отвратительный порошок в бутыльке.
+    effects:
+      - BLINDNESS/3/25
+      - WEAKNESS/1/15
+      - NAUSEA/1/10
+  wheatbeer:
+    name: Свежее Пшеничное пиво/Пшеничное пиво/Пшеничное пиво хорошего качества
+    ingredients:
+      - Wheat/14
+    cookingtime: 15
+    distillruns: 0
+    wood: 1
+    age: 2
+    color: ffb84d
+    difficulty: 1
+    alcohol: 5
+    lore: +++ &8Освежающий
+  beer:
+    name: Свежее Пиво/Пиво/Хорошее пиво
+    ingredients:
+      - Wheat/16
+    cookingtime: 15
+    distillruns: 0
+    wood: 0
+    age: 3
+    color: ffd333
+    difficulty: 1
+    alcohol: 6
+    lore:
+      - +++ &8Свежий вкус
+  darkbeer:
+    name: Свежее Темное пиво/Темное пиво/Прекрасное темное пиво
+    ingredients:
+      - Wheat/18
+    cookingtime: 15
+    distillruns: 0
+    wood: 6
+    age: 8
+    color: "650013"
+    difficulty: 2
+    alcohol: 7
+    lore:
+      - +++ &8Жареный вкус
+  wine:
+    name: Красное вино
+    ingredients:
+      - Sweet_Berries/12
+    cookingtime: 10
+    distillruns: 0
+    wood: 0
+    age: 20
+    color: RED
+    difficulty: 4
+    alcohol: 8
+    lore:
+      - + &8Жесткий
+      - + &8Закупоренный
+      - ++ &8Мягкий
+      - +++ &8Полноценный
+  mead:
+    name: Неуклюжий Мид/Мид/&6Золотой Мид
+    ingredients:
+      - Sugar_Cane/14
+    cookingtime: 7
+    distillruns: 0
+    wood: 2
+    age: 0
+    color: ORANGE
+    difficulty: 2
+    alcohol: 9
+    lore:
+      - +++ Имеет золотистый блеск
+  ap_mead:
+    name: Яблочная медовуха/Сладкая яблочная медовуха/&6Сладкая золотая яблочная медовуха
+    ingredients:
+      - Sugar_Cane/10
+      - Apple/6
+    cookingtime: 13
+    distillruns: 0
+    wood: 2
+    age: 4
+    color: ORANGE
+    difficulty: 4
+    alcohol: 11
+    lore:
+      - +Есть ли здесь яблоки?
+      - ++Освежающий вкус яблок
+      - +++Самый сладкий намек на яблоко
+    effects:
+      - WATER_BREATHING/1-2/150
+  cidre:
+    name: Бедный сидр/Яблочный сидр/Отличный яблочный сидр
+    ingredients:
+      - Apple/16
+    cookingtime: 7
+    distillruns: 0
+    wood: 0
+    age: 3
+    color: f86820
+    difficulty: 4
+    alcohol: 9
+  apple_liquor:
+    name: Кислый яблочный ликер/Яблочный ликер/Кальвадос
+    ingredients:
+      - Apple/12
+    cookingtime: 16
+    distillruns: 3
+    wood: 5
+    age: 6
+    color: BRIGHT_RED
+    difficulty: 5
+    alcohol: 14
+    lore:
+      - +Кислый, как кислота
+      - +++ Хороший яблочный ликер
+  whiskey:
+    name: Неприглядный виски/Виски/Шотландский виски
+    ingredients:
+      - Wheat/18
+    cookingtime: 20
+    distillruns: 2
+    distilltime: 50
+    wood: 4
+    age: 18
+    color: ORANGE
+    difficulty: 7
+    alcohol: 26
+    lore: "&7Односолодовый"
+  rum:
+    name: Горький ром/Пряный ром/&6Пиратский ром
+    ingredients:
+      - Sugar_Cane/20
+    cookingtime: 12
+    distillruns: 2
+    distilltime: 30
+    wood: 2
+    age: 14
+    color: DARK_RED
+    difficulty: 6
+    alcohol: 30
+    lore:
+      - +&8Слишком горько пить
+      - ++&8Приправленный в бочке
+      - +++&eЙо-хо-хо и бутылка рома!
+    effects:
+      - FIRE_RESISTANCE/1/20-100
+      - POISON/1-0/30-0
+  vodka:
+    name: Паршивая водка/Водка/Русская водка
+    ingredients:
+      - Potato/12
+    cookingtime: 15
+    distillruns: 3
+    age: 0
+    color: WHITE
+    difficulty: 4
+    alcohol: 20
+    lore: + &8Практически непригоден для питья
+    effects:
+      - WEAKNESS/1/15
+      - POISON/1/10
+  shroom_vodka:
+    name: Водка с грибами/Водка с грибами/Водка с сияющими грибами
+    ingredients:
+      - Potato/12
+      - Red_Mushroom/4
+      - Brown_Mushroom/2
+    cookingtime: 18
+    distillruns: 5
+    age: 0
+    color: ff9999
+    difficulty: 7
+    alcohol: 18
+    lore: +++&aСветится в темноте
+    effects:
+      - WEAKNESS/1/80
+      - NAUSEA/1/27
+      - NIGHT_VISION/1/50-80
+      - BLINDNESS/1/2
+      - SLOWNESS/1/10
+  gin:
+    name: Бледный Джин/Джин/Старый Джин
+    ingredients:
+      - Wheat/10
+      - blue-flowers/4
+      - Apple/2
+    cookingtime: 16
+    distillruns: 2
+    color: 99ddff
+    difficulty: 6
+    alcohol: 20
+    lore:
+      - ++ Наделен
+      - ++ Вкусом можжевельника
+      - +++ Прекрасно настоян
+      - +++ На можжевельнике
+  tequila:
+    name: Мескаль/Текила/Текила анехо
+    ingredients:
+      - cactus/16
+    cookingtime: 15
+    distillruns: 2
+    wood: 1
+    age: 12
+    color: f5f07e
+    difficulty: 5
+    alcohol: 20
+    lore: Дух пустыни
+  absinthe:
+    name: Плохой абсент/Абсент/Крепкий абсент
+    ingredients:
+      - Short_Grass/18
+    cookingtime: 20
+    distillruns: 6
+    distilltime: 80
+    color: GREEN
+    difficulty: 8
+    alcohol: 42
+    lore: +++&8Крепкий ликер
+    effects:
+      - POISON/1/15-25
+  rassol:
+    name: Плохой огуречный рассол/&2Огуречный рассол/&2Хороший огуречный рассол
+    ingredients:
+      - Sea_Pickle/10
+    cookingtime: 4
+    color: GREEN
+    difficulty: 1
+    alcohol: -20
+    lore:
+      - +&8  упер вкусный
+      - ++&8Приготовленный бабушкой
+      - +++&eНе напиток, а золото
+    effects:
+      - REGENERATION/1/20-100
+  chaigrib:
+    name: Плохой чайный гриб/&6Чайный гриб/&6Хороший Чайный гриб
+    ingredients:
+      - Mushroom_Stem/6
+      - Oak_Leaves/2
+    cookingtime: 8
+    color: ORANGE
+    difficulty: 1
+    alcohol: 0
+    lore:
+      - +&8Кисло-сладкий, газированный, прохладительный напиток
+      - ++&8Кисло-сладкий, газированный, прохладительный напиток
+      - +++&eКисло-сладкий, газированный, прохладительный напиток
+    effects:
+      - REGENERATION/1/5-20
+  portvein:
+    name: Кислый портвейн/&6Портвейн/&6Анархический портвейн
+    ingredients:
+      - Sugar_Cane/26
+      - Sweet_Berries/12
+      - Short_Grass/4
+    cookingtime: 15
+    distillruns: 3
+    distilltime: 45
+    wood: 0
+    age: 10
+    color: ORANGE
+    difficulty: 6
+    alcohol: 30
+    lore:
+      - +&8Целая бутыль анархизма!
+      - ++&cЦелая бутыль анархизма!
+      - +++&4Целая бутыль анархизма!
+  burbon:
+    name: Горький бурбон/&6Бурбон/&6Классный бурбон
+    ingredients:
+      - Short_Grass/16
+      - Gold_Nugget/4
+      - Poisonous_Potato/2
+    cookingtime: 25
+    distillruns: 6
+    distilltime: 45
+    wood: 0
+    age: 20
+    color: ORANGE
+    difficulty: 6
+    alcohol: 50
+    lore:
+      - +&8Французский король?
+      - ++&eФранцузский король?
+      - +++&5Французский король?
+  francevino:
+    name: Крепкое французское вино/&6Крепкое французское вино/&6Крепкое французское
+      вино
+    ingredients:
+      - Sweet_Berries/36
+    cookingtime: 10
+    wood: 0
+    age: 10
+    color: RED
+    difficulty: 3
+    alcohol: 20
+    lore:
+      - +&8Крепче обычного вина!
+      - ++&cКрепче обычного вина!
+      - +++&4Крепче обычного вина!
+  seatea:
+    name: Кислый чай/&bЯгодный чай/&bЯпонский чай
+    ingredients:
+      - Kelp/12
+      - Sweet_Berries/6
+      - Seagrass/2
+    cookingtime: 8
+    color: CYAN
+    difficulty: 4
+    alcohol: 0
+    lore:
+      - +&8Херовый чай из Страны Восходящего Солнца
+      - ++&eЧики-брики чай из Страны Восходящего Солнца
+      - +++&bМега чай прямо из Страны Восходящего Солнца
+    effects:
+      - REGENERATION/1/20
+      - SPEED/1/5-15
+  beermilk:
+    name: Свежее молочное пиво/Молочное пиво/Качественное молочное пиво
+    ingredients:
+      - wheat/14
+      - milk_bucket/2
+    cookingtime: 12
+    wood: 0
+    age: 3
+    color: FFFF00
+    difficulty: 2
+    alcohol: 10
+    lore:
+      - +&8Подождите... что?
+      - ++&eПодождите... что?
+      - +++&bПодождите... что?
+  schnapps:
+    name: Низкокачественный Шнапс/&fШнапс/&fКачественный Шнапс
+    ingredients:
+      - wheat/12
+      - Sweet_Berries/6
+    cookingtime: 10
+    distillruns: 2
+    distilltime: 30
+    color: F5FFFA
+    difficulty: 3
+    alcohol: 17
+    lore:
+      - +&8Освежает
+      - ++&eОсвежает
+      - +++&bОсвежает
+  badgoldenrot:
+    name: Плохой Голденрот/&6Голденрот/&eБлестящий Голденрот
+    ingredients:
+      - gold_nugget/6
+      - glow_berries/2
+      - wheat/10
+      - Sweet_Berries/6
+    cookingtime: 10
+    distillruns: 2
+    distilltime: 30
+    color: DAA520
+    difficulty: 4
+    alcohol: 24
+    lore:
+      - +&8Осторожно, может содержать золото
+      - ++&eОсторожно, может содержать золото
+      - +++&cОсторожно, может содержать золото
+    effects:
+      - POISON/1/5-30
+  kvass:
+    name: Похлебка/&6Квас/&6Вятский квас
+    ingredients:
+      - bread/6
+      - brown_mushroom/2
+      - sugar/4
+    cookingtime: 12
+    wood: 0
+    age: 4
+    color: 7E5C38
+    difficulty: 4
+    alcohol: 1
+    lore:
+      - +&8Вятский квас здоровья спас
+      - ++&eВятский квас здоровья спас
+      - +++&6Вятский квас здоровья спас
+    effects:
+      - REGENERATION/1/5-10
+  chocolateliker:
+    name: Плохой ликер/&6Шоколадный ликер/&6Балдежный шоколадный ликер
+    ingredients:
+      - potato/12
+      - cocoa_beans/10
+      - sugar/6
+    cookingtime: 16
+    distillruns: 3
+    distilltime: 30
+    color: D2691E
+    difficulty: 4
+    alcohol: 26
+    lore:
+      - +&8Ну с кайфом че
+      - ++&eЖивчик сахарный
+      - +++&6Жопа слипнется
+    effects:
+      - REGENERATION/1/5-10
+  expresso:
+    name: Холодный эспрессо/Эспрессо/Качественный эспрессо
+    ingredients:
+      - Cocoa_Beans/12
+      - Milk_Bucket/2
+      - Sugar/4
+    cookingtime: 4
+    color: BLACK
+    difficulty: 2
+    alcohol: -10
+    lore:
+      - +&8Херовый эспрессо из жопы сира
+      - ++&eExpresso из AnyTime
+      - +++&fЭспрессо за 599 рублей из Starbucks
+    effects:
+      - SPEED/1/15-25
+  cognac:
+    name: Горький коньяк/&6Коньяк/&6Настоявшийся Коньяк
+    ingredients:
+      - Oak_Sapling/6
+      - Sugar/4
+    cookingtime: 12
+    wood: 4
+    age: 8
+    color: DARK_RED
+    difficulty: 6
+    alcohol: 46
+    lore:
+      - +&4Манящий запах
+      - ++&4Манящий запах
+      - +++&4Манящий запах
+    effects:
+      - REGENERATION/1/5-20
+      - POISON/1/25-40
+  gr_absinthe:
+    name: Плохой абсент/Зеленый абсент/Ярко-зеленый абсент
+    ingredients:
+      - Short_Grass/16
+      - Poisonous_Potato/4
+    cookingtime: 20
+    distillruns: 6
+    distilltime: 85
+    color: LIME
+    difficulty: 9
+    alcohol: 46
+    lore: "&aВыглядит ядовито"
+    effects:
+      - POISON/1/25-40
+      - INSTANT_DAMAGE/2
+      - NIGHT_VISION/1/40-60
+  potato_soup:
+    name: Картофельный суп
+    ingredients:
+      - Potato/6
+      - Short_Grass/4
+    cookingtime: 3
+    color: ORANGE
+    difficulty: 1
+    effects:
+      - INSTANT_HEALTH/0-1
+  sulfur:
+    name: Хреновая cерная кислота/Серная кислота/Качественная серная кислота
+    ingredients:
+      - Spider_Eye/4
+      - Wither_Rose/2
+      - Slime_Ball/2
+    cookingtime: 4
+    distillruns: 1
+    distilltime: 10
+    color: e8dd6d
+    difficulty: 5
+    alcohol: 0
+    lore: +++&8H2SO4
+    effects:
+      - POISON/10-15/15-25
+  atseton:
+    name: Плохой ацетон/Ацетон/Жёсткая ебанина
+    ingredients:
+      - Nautilus_Shell/6
+      - Coal_Block/6
+      - Gunpowder/32
+      - Slime_Ball/14
+    cookingtime: 60
+    distillruns: 6
+    distilltime: 80
+    color: GREEN
+    difficulty: 5
+    alcohol: 100
+    lore: +++&8Крепкий ацетон
+    effects:
+      - POISON/1/15-25
+  orlan:
+    name: Гнилой орлан/Орлан/Конченая ебанина
+    ingredients:
+      - Diamond/18
+      - Emerald/48
+      - Gunpowder/32
+    cookingtime: 60
+    distillruns: 6
+    distilltime: 80
+    wood: 0
+    age: 20
+    color: 7E5C38
+    difficulty: 5
+    alcohol: 100
+    lore: +++&8Крепкий ацетон
+    effects:
+      - POISON/1/15-25
+  coffee:
+    name: Несвежий кофе/Кофе/Крепкий кофе
+    ingredients:
+      - Cocoa_Beans/14
+      - Milk_Bucket/4
+    cookingtime: 2
+    color: BLACK
+    difficulty: 3
+    alcohol: -6
+    lore: + &8Недельная выдержка
+    effects:
+      - REGENERATION/1/2-5
+      - SPEED/1/30-140
+  eggnog:
+    name: Яичный ликер/Гоголь-Моголь/Адвокаат
+    ingredients:
+      - Egg/6
+      - Sugar/4
+      - Milk_Bucket/2
+    cookingtime: 4
+    wood: 0
+    age: 3
+    color: ffe680
+    difficulty: 4
+    alcohol: 10
+    lore: Сделано из сырого яйца
+  nightalt:
+    name: Странное пойло/Коктель из другого мира/"Ночной Альт-Сити"
+    ingredients:
+      - End_Stone/2
+      - Wheat/14
+      - Blaze_Powder/4
+      - Rotten_Flesh/2
+      - Cake/1
+      - Potato/4
+    cookingtime: 21
+    distillruns: 3
+    distilltime: 120
+    color: 5E0C94
+    difficulty: 6
+    alcohol: 45
+    lore:
+      - +&4А это точно из нашего мира?
+      - ++&4Выглядит аппетитно, но странно
+      - +++&4Один из лучших напитков из других миров!
+    effects:
+      - FIRE_RESISTANCE/1/200
+  adminbeer:
+    name: Пойло админов/Нормальное пиво админов/Пиво Хэвирона
+    ingredients:
+      - Wheat/64
+      - Ghast_Tear/6
+      - Crossbow/2
+      - Firework_star/12
+      - Blaze_Powder/25
+    cookingtime: 120
+    distillruns: 6
+    distilltime: 60
+    color: "000000"
+    difficulty: 6
+    alcohol: 100
+    lore:
+      - +&4И это пиво?
+      - ++&4Откуда это у тебя?
+      - +++&4Верни блять!
+    effects:
+      - BLINDNESS/1/60
+      - WITHER/1/30
+      - GLOWING/1/120
+      - SLOW_FALLING/1/200
+      - LUCK/3/240
+  admin:
+    name: Креативный отрезвитель/Креативный отрезвитель/Креативный отрезвитель
+    ingredients:
+      - Bedrock/2
+    cookingtime: 5
+    color: "000000"
+    difficulty: 6
+    alcohol: -100
+    lore:
+      - Откуда это у тебя?
+      - Это просто тестовый предмет
+  Daikiri:
+    name: Дайкири/Классический Дайкири/Дайкири спешл
+    ingredients:
+      - sugar_cane/18
+      - ice/4
+      - glow_berries/4
+    cookingtime: 16
+    distillruns: 2
+    distilltime: 20
+    wood: 0
+    age: 5
+    color: 6FF693
+    difficulty: 5
+    alcohol: 35
+    lore:
+      - +Обычный Дайкири, ничего необычного
+      - ++Тот самый классический Дайкири!
+      - +++Хемингуэй передаёт привет
+  energy:
+    name: Drive/Gorilla/Flash
+    ingredients:
+      - moss_block/12
+      - cocoa_beans/16
+      - sugar/14
+      - diamond/2
+    cookingtime: 10
+    distillruns: 3
+    distilltime: 10
+    color: 00FF3C
+    difficulty: 4
+    lore:
+      - +Фуфло но даёт энергию
+      - ++Мммм нормально
+      - +++Как быстро!
+    effects:
+      - HASTE/2/120
+  teaurum:
+    name: Чай "Хуйта"/Чай "Конча"/Чай "Урумча"
+    ingredients:
+      - sugar/16
+      - bread/2
+      - diamond/4
+    cookingtime: 5
+    distillruns: 6
+    distilltime: 25
+    color: DAA520
+    lore:
+      - +Ммм хуета
+      - ++Втф я так хочу спать
+      - +++Спи!
+    effects:
+      - LUCK/2/90
+      - WEAKNESS/2/120
+  revo:
+    name: Новое Рево/Красное Рево/Серое Рево
+    ingredients:
+      - sugar/16
+      - cocoa_beans/64
+      - diamond/4
+    cookingtime: 20
+    distillruns: 3
+    distilltime: 35
+    color: 8B4513
+    lore:
+      - +Только с магаза
+      - ++Красная как кровь
+      - +++Найс
+    effects:
+      - DARKNESS/1/120
+      - HEALTH_BOOST/3/120
+  baltika:
+    name: Балтик/Балтика/Балтика
+    ingredients:
+      - wheat/64
+      - sugar/12
+      - diamond/2
+    cookingtime: 5
+    distillruns: 3
+    distilltime: 35
+    color: FFFFFF
+    alcohol: 55
+    lore:
+      - Ммммм кайф
+    drinkmessage: Вы чувствуете кайф
+  samogon:
+    name: Самогон?/Самогон/Дедовский самогон
+    ingredients:
+      - sugar/4
+      - apple/6
+      - Sweet_Berries/8
+    cookingtime: 20
+    distillruns: 3
+    distilltime: 35
+    color: 8B4513
+    alcohol: 60
+    lore:
+      - +Мне кажется это лучше не пить
+      - ++Обычный самогон *ик*
+      - +++Дед хватит бухать!
+      - +++Нет)
+  snowvodka:
+    name: Снежная водка/Сибирская водка/Алмазная сибирская водка
+    ingredients:
+      - potato/12
+      - diamond/5
+      - snow_block/12
+      - ice/2
+    cookingtime: 18
+    distillruns: 3
+    distilltime: 45
+    color: B2F0FF
+    alcohol: 45
+  mohito:
+    name: Белый ром с мятой/Мохито/Изумрудное Мохито
+    ingredients:
+      - Sugar_Cane/26
+      - Emerald/6
+      - Fern/2
+    cookingtime: 12
+    color: 77FF6E
+    difficulty: 3
+    alcohol: 24
+    lore:
+      - +Ммммм хуета
+      - ++Обычное мохито
+      - +++Кхе кхе это что...
+      - +++Кусочек изумруда?
+  punsh:
+    name: Плохой Пунш/Пунш/Дорогой Пунш
+    ingredients:
+      - Apple/4
+      - Sugar_Cane/6
+      - melon_slice/2
+    cookingtime: 12
+    color: E5FFBD
+    difficulty: 5
+    alcohol: 32
+  g_vodka:
+    name: Прогорклая водка/&6Золотая Водка/&6Легендарная Золотая Водка
+    ingredients:
+      - Potato/10
+      - Gold_Nugget/4
+      - glow_berries/6
+    cookingtime: 18
+    distillruns: 3
+    color: DBC500
+    difficulty: 6
+    alcohol: 20
+    lore:
+      - +Что ты сварил? Гадость
+      - ++Золотая?
+      - ++Ты уверен что это можно пить?
+      - +++ &6Не может быть!
+      - +++ &6Оно ещё и светится...
+    effects:
+      - WEAKNESS/1/28
+      - POISON/1/4
+  Honey_Raf:
+    name: Фиговый кофе с мёдом/Кофе с мёдиком/Медовый Раф
+    ingredients:
+      - cocoa_beans/12
+      - sugar/4
+      - honey_bottle/4
+      - milk_bucket/2
+    cookingtime: 12
+    color: A47C5E
+    difficulty: 5
+    lore:
+      - + &8Спасибо за идею - washan
+      - ++ &eСпасибо за идею - washan
+      - +++ &6Спасибо за идею - washan
+      - +++ &6Высшее общество
+  mineral:
+    name: Водичка с химией/Минералка/Святая минералочка
+    ingredients:
+      - iron_ingot/4
+      - diamond/1
+      - quartz/5
+      - bone/6
+      - bedrock/1
+    cookingtime: 8
+    color: 73DEDE
+    difficulty: 10
+    lore:
+      - Спасибо что достал Sir_Hoholish
+  koks:
+    name: Кокосовая стружка в баночке/Подозрительный порошок в баночке/Кокаин
+    ingredients:
+      - sugar/6
+      - amethyst_shard/3
+      - prismarine_shard/2
+      - snow_block/1
+      - diamond/2
+    cookingtime: 20
+    color: FFFFFF
+    difficulty: 10
+    lore:
+      - +Обычная кокосовая стружка
+      - ++Так... а теперь положи это на место
+      - +++FBI OPEN UP
+    effects:
+      - WEAKNESS/1/28
+      - POISON/1/10
+      - DARKNESS/1/60
+  Champagne:
+    name: Очередная виноградная бражка/Шампанское/Блестящее Шампанское
+    ingredients:
+      - Apple/4
+      - Gold_Nugget/2
+      - Sugar/2
+      - Sweet_Berries/5
+    cookingtime: 5
+    distillruns: 1
+    wood: 2
+    age: 2
+    color: f4f4f4
+    difficulty: 9
+    alcohol: 20
+    lore:
+      - + §fГадость
+      - ++ §fНеплохое Шампанское
+      - +++ §5WoW
+  Brandy:
+    name: Обычная винная бражка/Бренди/Высококачественный Бренди
+    ingredients:
+      - Sweet_Berries/6
+      - cactus/4
+      - Sugar/2
+    cookingtime: 10
+    distillruns: 1
+    wood: 4
+    age: 8
+    color: ff8800
+    difficulty: 8
+    alcohol: 40
+    lore:
+      - + §8Мэх
+      - ++ §eОбычное ничем не примечательное Бренди
+      - +++ §6Бренди наилучшего качества
+  Honeywine:
+    name: Медовая виноградная бражка/Медовое вино/Необычайно вкусное Медовое вино
+    ingredients:
+      - Honey_Bottle/2
+      - Sweet_Berries/12
+    cookingtime: 15
+    distillruns: 3
+    wood: 0
+    age: 10
+    color: f1ff1a
+    difficulty: 4
+    alcohol: 25
+    lore:
+      - + §8Мэх
+      - ++ §eВино среднего качества со вкусом мёда
+      - +++ §6Вино наилучшего качества со вкусом мёда
+  Honeybeer:
+    name: Медовое Пойло/Медовое пиво/Золотое Медовое пиво
+    ingredients:
+      - Honey_Bottle/6
+      - Wheat/20
+      - gold_ingot/4
+    cookingtime: 10
+    wood: 3
+    age: 5
+    color: ff941a
+    difficulty: 5
+    alcohol: 5
+    lore:
+      - + §7Не пиво а фигня
+      - ++ §eМедовое пиво? А может медовуха?
+      - +++ §6Золотая чаша золотая!
+  Englishhoney:
+    name: Что-то из Британии/Английский мёд/GREAT ENGLISH HONEY
+    ingredients:
+      - Honey_Bottle/2
+      - Wheat/16
+      - Sugar/6
+      - emerald/2
+      - lapis_lazuli/2
+      - iron_ingot/2
+      - redstone/2
+    cookingtime: 10
+    wood: 3
+    age: 5
+    color: ff941a
+    difficulty: 10
+    alcohol: 5
+    lore:
+      - + §7Фу ну и гадость
+      - ++ §eМмм прикольно
+      - +++ §6Well well well this is...
+      - +++ §6 WOOOOOOOOOW
+  CustomMade_darkness:
+    name: "&#008B8B Живая Масса.../&#808080 Тёмный Коктейль/&#FFD700 Тьма на заказ!
+      Конечно"
+    ingredients:
+      - sculk_catalyst/1
+      - sculk_shrieker/3
+      - sculk_sensor/6
+      - sculk_vein/12
+      - sculk/18
+    cookingtime: 1500
+    distillruns: 3
+    distilltime: 30
+    color: BLACK
+    difficulty: 10
+    lore:
+      - + &#80808012am
+      - ++ &#C0C0C0Darker even Darker...
+      - +++ &#FFFFFF13am...
+    glint: true
+    effects:
+      - DARKNESS/1-5/30-90
+      - RESISTANCE/1-3/30-60
+      - SLOWNESS/1-3/10-30
+      - BLINDNESS/1-3/10-30
+  Jager_meister:
+    name: Травяная настойка/Травяной ликёр/Jägermeister
+    ingredients:
+      - moss_block/2
+      - short_grass/5
+      - fern/4
+      - dandelion/5
+      - poppy/5
+      - cornflower/5
+      - crimson_roots/2
+      - warped_roots/3
+      - sugar_cane/2
+      - vine/2
+      - small_dripleaf/4
+      - kelp/6
+      - lily_pad/2
+      - sugar/20
+    cookingtime: 60
+    color: 2b0d0f
+    difficulty: 5
+    wood: 4
+    age: 1
+    alcohol: 35
+    lore:
+      - "&#FF00FF Ягей мастер"
+    effects:
+      - STRENGTH/1-2/15-30
+      - NAUSEA/3/30
+      - SPEED/1/30
+      - HUNGER/1/30
+  Moss:
+    name: "&#38761d Мох/&#38761d Мох/&#38761d Мох"
+    ingredients:
+      - moss_block/4
+    cookingtime: 5
+    wood: 4
+    age: 1
+    color: '008000'
+    difficulty: 3
+    alcohol: 5
+    lore:
+      - + &#008000Ммм мох
+      - ++ &#008000Еда богов
+      - +++ &#008000КРИС ХВАТИТ ЖРАТЬ МОХ
+    effects:
+      - REGENERATION/1-2/10-15
+      - SATURATION/1-10/10-15
+  Blood:
+    name: "&#6B8E23 Гнилой сок/&#8B0000 Запёкшаяся кровь/&#c70000 Чистая &#e10000
+      Кровь"
+    ingredients:
+      - rotten_flesh/48
+      - blaze_powder/6
+    cookingtime: 60
+    distillruns: 3
+    distilltime: 50
+    color: FF0000
+    difficulty: 3
+    alcohol: 25
+    lore:
+      - + &#6B8E23Щас блевану...
+      - ++ &#ae0000Ты говорила засахарилось
+      - +++ &#e10000Сила падших во мне
+    effects:
+      - HUNGER/10/32
+      - STRENGTH/1-2/15-30
+      - REGENERATION/1-3/3-5
+  Guardian_Heart:
+    name: "&3 Сердце Хранителя/&3 Сердце Хранителя/&3 Сердце Хранителя"
+    ingredients:
+      - brewery:CustomMade_darkness/2
+      - brewery:Tincture_growth/1
+      - brewery:Blood/2
+      - nether_star/1
+    cookingtime: 300
+    distillruns: 5
+    distilltime: 20
+    color: 008B8B
+    difficulty: 10
+    alcohol: -10
+    lore:
+      - Ты? Защитник? ХАХАХАХАХА!
+      - + &#DC143C Тебя используют...
+      - ++ &#800000 Войны, не избежать...
+      - +++ &#FF0000 Чёрная кровь льётся фонтанами!
+    glint: true
+    drinktitle: Вперёд Берсерк
+    effects:
+      - STRENGTH/3-5/60-120
+      - RESISTANCE/1-5/60-120
+      - REGENERATION/255/5
+      - HEALTH_BOOST/1-15/60-120
+      - DARKNESS/1-5/30-90
+      - SLOWNESS/1-3/10-30
+      - BLINDNESS/1-3/5-15
+      - HUNGER/10/16
+  Hvoi_Mineralka:
+    name: Игольчатая закваска/Игольчатая сахарная закваска/ХвОЙная Минералочка
+    ingredients:
+      - spruce_leaves/16
+      - sugar/6
+    cookingtime: 10
+    color: GREEN
+    difficulty: 3
+    alcohol: 3
+    lore:
+      - +Ёлки иголки, ну и хрень!
+      - ++Ммм, хвоета!
+      - +++Ай, колется!
+    effects:
+      - FIRE_RESISTANCE/1/30-60
+      - ABSORPTION/1/10-30
+  Flame_blood:
+    name: Жгучая дрань/Горячая кровь/Огненная кровь
+    ingredients:
+      - rotten_flesh/48
+      - blaze_powder/18
+      - fire_charge/2
+      - lava_bucket/2
+    cookingtime: 60
+    distillruns: 3
+    distilltime: 50
+    color: ffde1a
+    difficulty: 10
+    lore:
+      - +++ &#ffa700НАША КИПЯЩАЯ КРОВЬ РАСПЛАВИТ ВСЕ ПУТЫ!
+    glint: true
+    effects:
+      - STRENGTH/1-3/15-30
+      - REGENERATION/1-3/5
+  Last_chance:
+    name: Последний Шанс
+    ingredients:
+      - brewery:CustomMade_Radiance/2
+      - brewery:Tincture_growth/2
+      - brewery:Flame_blood/1
+      - red_stained_glass
+      - nether_star/2
+    cookingtime: 300
+    distillruns: 5
+    distilltime: 20
+    color: ff7400
+    difficulty: 10
+    lore:
+    - '&#ff8d00Может это абсурдно. Может, смешно.'
+    - '&#ff8d00Но так сражаются мужчины'
+    - '&#ffce00Мы снесём любую стену, вставшую на пути!'
+    - '&#ffce00Если нет пути — мы его проложим!'
+    - '&#ff7400Магма течёт в наших венах, раскаляя сердца!'
+    - '&#ff7400Безграничное слияние, Гуррен-Лаганн'
+    - '&#ffce00Ведь я…'
+    - '&#ff8d00Ведь мы…'
+    - '&#ff7400Вы за кого нас держите?!'
+    - '...'
+    - +++ &#ff8d00Счастливо, братцы!
+    servercommands:
+    - +++ damage %player_name% 99999 minecraft:generic_kill / 130s
+    glint: true
+    effects:
+      - STRENGTH/3-5/60-120
+      - RESISTANCE/1-5/60-120
+      - REGENERATION/10/60-120
+      - SPEED/1-3/60-120
+  CustomMade_Radiance:
+    name: Блестящая водичка/Сияющие искорки/Сияние на Заказ! Конечно
+    ingredients:
+      - glowstone/14
+      - glow_berries/18
+      - blaze_powder/12
+      - gold_ingot/4
+    cookingtime: 30
+    distillruns: 120
+    distilltime: 1
+    color: YELLOW
+    difficulty: 5
+    alcohol: 15
+    lore:
+      - + Что-то Энергическое
+      - ++ Что-то Энергическое
+      - ++ Погоди
+      - +++ Что-то Энергическое
+      - +++ Погоди
+      - +++ Ебать это чё кусок Золота?
+    effects:
+      - HASTE/1-2/30-60
+      - STRENGTH/1-3/15
+      - FIRE_RESISTANCE/1/60
+      - HEALTH_BOOST/5/30
+  Tincture_growth:
+    name: Настойка из растения/Красная настойка/&4Настойка из Нароста
+    ingredients:
+      - nether_wart/28
+    cookingtime: 10
+    distillruns: 1
+    distilltime: 100
+    color: RED
+    difficulty: 5
+    alcohol: 15
+    lore:
+      - "&6Реагент"
+      - + &4Дрянь какая...
+      - ++ &4Хм... Вроде прикольно...
+      - +++ &4Хочу ещё
+    effects:
+      - HUNGER/3/15
+  pink_drink:
+    name: "&7Розовая водичка/Розовый напиток/&d&lРозовый нектар"
+    ingredients:
+      - sweet_berries/6
+      - sugar/4
+      - pink_dye/2
+      - melon_slice/2
+      - milk_bucket/2
+    cookingtime: 8
+    color: FF69B4
+    difficulty: 3
+    alcohol: 2
+    glint: true
+    lore:
+      - + &7Розовая жижа… пахнет сомнительно
+      - ++ &dСладкий привкус детства
+      - +++ &d&lНевероятная нежность и сила
+    effects:
+      - REGENERATION/1-3/10-30
+      - SPEED/1-2/15-45
+      - SATURATION/1-2/10-20
+      - JUMP_BOOST/1-2/10-30
+      - HEALTH_BOOST/0-2/30-60
+  glacial_warden:
+    name: "&bЛедяная жижа/&3Гласиал Варден/&b&lДыхание Хранителя"
+    ingredients:
+      - brewery:CustomMade_darkness/2
+      - brewery:Hvoi_Mineralka/2
+      - packed_ice/16
+      - blue_ice/6
+      - sculk/16
+      - snow_block/12
+      - ghast_tear/2
+    cookingtime: 90
+    distillruns: 3
+    distilltime: 60
+    wood: 4
+    age: 13
+    color: 5D8C9B
+    difficulty: 10
+    alcohol: 30
+    glint: true
+    lore:
+      - + &7Холод пробирает до костей... тьма рядом
+      - ++ &3В груди стынет кровь, но ты становишься крепче
+      - +++ &bТы слышишь шёпот древнего льда. Хранитель признал тебя.
+    effects:
+      - RESISTANCE/2-5/60-180
+      - SLOWNESS/2-0/30-0
+      - DARKNESS/2-4/30-90
+      - HEALTH_BOOST/2-6/60-180
+      - FIRE_RESISTANCE/0-1/60-120
+      - WITHER/1-0/10-0
+  end_dragon_nectar:
+    name: "&5Жидкий энд/Драконья слюна/&dНектар Края"
+    ingredients:
+      - end_stone/36
+      - ender_pearl/8
+      - ender_eye/4
+      - ghast_tear/2
+      - blaze_powder/12
+      - chorus_flower/8
+      - dragon_breath/2
+      - nether_star/2
+    cookingtime: 120
+    distillruns: 4
+    distilltime: 60
+    wood: 6
+    age: 20
+    color: 9932CC
+    difficulty: 10
+    alcohol: 20
+    glint: true
+    lore:
+      - + &8Мутный фиолетовый осадок... пахнет Краем
+      - ++ &dДраконья сила пульсирует в такт с сердцем
+      - +++ &5Перед глазами острова Края
+    effects:
+      - LEVITATION/1-0/20-0
+      - SLOW_FALLING/0-1/0-60
+      - STRENGTH/1-3/30-120
+      - RESISTANCE/1-3/30-120
+      - REGENERATION/1-3/10-60
+      - HEALTH_BOOST/2-6/60-180
+      - LUCK/1-3/60-180
+  Princely roses:
+    name: "&dРозовый отвар/Розовый ликёр/&5Королевские розы"
+    ingredients:
+      - rose_bush/10
+      - cornflower/6
+      - sweet_berries/12
+      - gold_nugget/4
+      - sugar/8
+      - milk_bucket/2
+      - honey_bottle/2
+    cookingtime: 25
+    distillruns: 1
+    distilltime: 30
+    wood: 2
+    age: 3
+    color: C71585
+    difficulty: 6
+    alcohol: 18
+    lore:
+      - + &8Пахнет прокисшим вареньем и железом
+      - ++ &dУтончённый аромат, достойный княжеского стола
+      - +++ &5Лепестки роз королевского сада тают на языке
+    effects:
+      - REGENERATION/1-2/15-45
+      - LUCK/1-3/30-120
+      - SATURATION/1-2/10-30
+      - HEALTH_BOOST/0-5/30-90
+      - POISON/1-0/10-0
+  akemi_milk:
+    name: "&fМолочко Акеми/&dНежное молоко/&f&lГрудное молоко Akemi"
+    ingredients:
+      - milk_bucket/4
+      - sugar/6
+      - honey_bottle/2
+      - sweet_berries/6
+      - pink_dye/2
+      - egg/2
+    cookingtime: 15
+    color: FDF5E6
+    difficulty: 4
+    alcohol: 3
+    lore:
+      - + &fМагазинное молоко
+      - ++ &dМягкое, тёплое, как воспоминание из детства
+      - +++ &fНастоящее молоко самой Акеми! Сладкое и нежное
+    effects:
+      - ABSORPTION/1-3/30-90
+      - SLOW_FALLING/0-1/0-60
+  Rat_poison:
+    name: "&2Крысиная отрава/Крысиный яд/&2Яд короля крыс"
+    ingredients:
+      - spider_eye/2
+      - poisonous_potato/4
+      - brown_mushroom/8
+      - red_mushroom/6
+      - rotten_flesh/4
+      - bone_meal/6
+      - sugar/2
+    cookingtime: 30
+    distillruns: 2
+    distilltime: 40
+    color: 2E8B57
+    difficulty: 7
+    alcohol: 5
+    lore:
+      - + &2Мутная зелёная жижа… пить это точно не стоит
+      - ++ &2Пахнет крысиным гнездом и сыростью
+      - +++ &2Идеально выдержанный яд, достойный самого Короля Крыс
+    glint: true
+    effects:
+      - POISON/1-4/20-60
+      - WITHER/0-5/0-30
+      - NAUSEA/3-0/20-0
+      - BLINDNESS/2-0/15-0
+      - WEAKNESS/2-0/30-0
+  percovochka:
+    name: Перцовая вода/Перцовочка/Медовая перцовочка
+    ingredients:
+      - potato/18
+      - sugar/6
+      - blaze_powder/2
+      - red_mushroom/3
+      - honey_bottle/2
+    cookingtime: 20
+    distillruns: 3
+    distilltime: 45
+    wood: 4
+    age: 6
+    color: D2691E
+    difficulty: 6
+    alcohol: 35
+    lore:
+      - + &cОбжигает горло, но совсем не греет
+      - ++ &6В меру остро, с медовым послевкусием
+      - +++ &4Жар перца и сладость мёда в идеальном балансе
+    effects:
+      - FIRE_RESISTANCE/1/30-90
+      - STRENGTH/1-2/20-60
+      - REGENERATION/0-1/10-30
+      - POISON/1-0/10-0
+      - WEAKNESS/1-0/15-0
+  stary_melnik:
+    name: Пшеничная бражка/Мельничный эль/Старый мельник
+    ingredients:
+      - wheat/18
+      - bread/4
+      - sugar/2
+      - brown_mushroom/2
+    cookingtime: 25
+    wood: 2
+    age: 3
+    color: D2691E
+    difficulty: 4
+    alcohol: 8
+    lore:
+      - + &7Пахнет сырым подвалом и дрожжами
+      - ++ &6Плотное, с хлебными нотками
+      - +++ &eНастоящий старый мельник — густое и янтарное
+    effects:
+      - SATURATION/1-2/10-20
+      - REGENERATION/1/10-25
+      - HASTE/0-1/30-60
+      - POISON/1-0/5-0
+  medical_spirit:
+    name: Сивуха/Спирт/Медицинский спирт 96%
+    ingredients:
+      - potato/96
+      - sugar/96
+    cookingtime: 40
+    distillruns: 5
+    distilltime: 60
+    color: FFFFFF
+    difficulty: 8
+    alcohol: 96
+    lore:
+      - + &7Мутная сивуха, глаза слезятся от запаха
+      - ++ &fПрозрачный, но всё ещё опасный
+      - +++ &f96% чистоты. Только для медицины, а может....
+    effects:
+      - POISON/3-5/20-40
+      - BLINDNESS/2-4/15-30
+      - SLOWNESS/3-5/20-40
+      - WEAKNESS/3-5/30-60
+      - NAUSEA/3-5/20-40
+      - HUNGER/4-6/30-60
+  liquid_pain:
+    name: Жёлтая жижа/Отрава/Жидкая боль
+    ingredients:
+      - yellow_dye/6
+      - spider_eye/8
+      - poisonous_potato/6
+      - rotten_flesh/12
+      - bone_meal/14
+      - brown_mushroom/6
+      - red_mushroom/8
+    cookingtime: 50
+    distillruns: 3
+    distilltime: 40
+    color: 9ACD32
+    difficulty: 9
+    alcohol: 30
+    glint: true
+    lore:
+      - + &2Воняет сыростью
+      - ++ &2Невыносимая боль разливается
+      - ++ &2по каждой жилке твоего тела
+      - +++ &eЧерез 1 глоток ты будешь
+      - +++ &eзавидовать мёртвым
+    effects:
+      - WITHER/1-4/20-60
+      - POISON/2-5/30-90
+      - SLOWNESS/3-6/40-120
+      - WEAKNESS/2-5/60-180
+      - BLINDNESS/2-4/20-60
+      - NAUSEA/3-5/30-90
+      - HUNGER/4-7/60-120
+  infinite_cake:
+    name: Жидкое тесто/Кремовый эликсир/Зелье тортика
+    ingredients:
+      - wheat/6
+      - egg/4
+      - sugar/8
+      - milk_bucket/1
+      - cocoa_beans/4
+      - sweet_berries/6
+    cookingtime: 15
+    distillruns: 1
+    distilltime: 20
+    color: F5DEB3
+    difficulty: 10
+    alcohol: 2
+    glint: true
+    lore:
+      - + &6Пахнет подгоревшим бисквитом
+      - ++ &eНежный сливочный вкус, хочется добавки
+      - +++ &fНастоящее наслаждение!
+    effects:
+      - SATURATION/2-4/10-30
+      - REGENERATION/1-2/15-45
+      - SPEED/0-1/20-40
+    servercommands:
+      - +++ give cake 1
+  cow_rabies:
+    name: Костная водичка/Мутная мука/Коровье бешенство
+    ingredients:
+      - bone_meal/64
+      - wheat/32
+      - brown_mushroom/18
+      - red_mushroom/18
+      - rotten_flesh/10
+    cookingtime: 60
+    color: 8B5A2B
+    difficulty: 8
+    alcohol: 5
+    lore:
+      - + &8Пахнет фермой и сыростью
+      - ++ &8В глазах мутнеет, мысли путаются
+      - +++ &4Твой мозг превращается в губку... ты уже не человек
+    effects:
+      - SLOWNESS/2-5/0-86400
+      - WEAKNESS/2-5/0-86400
+      - BLINDNESS/1-3/0-86400
+      - NAUSEA/2-4/0-86400
+      - HUNGER/3-6/0-86400
+    servercommands:
+      - +++ kill %player_name% / 86400s
