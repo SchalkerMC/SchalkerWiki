@@ -27,6 +27,7 @@ pages/
 ├── invisiblelight.mdx     # Невидимый свет
 ├── fast-concrete.mdx      # Быстрый бетон
 ├── brewery.mdx            # Алкоголь
+├── fishing.mdx            # Рыбалка, мешочки и починка
 ├── voicechat.mdx          # Голосовой чат
 ├── account-premium.mdx    # Вход без пароля
 ├── privacy-policy.mdx     # Политика конфиденциальности
