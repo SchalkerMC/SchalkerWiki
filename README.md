@@ -28,6 +28,7 @@ pages/
 ├── fast-concrete.mdx      # Быстрый бетон
 ├── brewery.mdx            # Алкоголь
 ├── fishing.mdx            # Рыбалка, мешочки и починка
+├── farms.mdx              # Фермы: спавн, деспавн, лимиты мобов
 ├── voicechat.mdx          # Голосовой чат
 ├── account-premium.mdx    # Вход без пароля
 ├── privacy-policy.mdx     # Политика конфиденциальности
